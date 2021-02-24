@@ -14,21 +14,23 @@ public class Main {
         System.out.print("Введіть число : ");
         int num = scanner.nextInt();
         while(num != 5){
-            if(num >= 1 && num <= 5){
-                if(num ==1){
+            switch (num) {
+                case 1:
                     task1();
-                }
-                if(num ==2){
+                    break;
+                case 2:
                     task2();
-                }
-                if(num ==3){
+                    break;
+                case 3:
                     task3();
-                }
-                if(num ==4){
+                    break;
+                case 4:
                     task4();
-                }
+                    break;
+                default:
+                    System.out.println("Не вірно введене число!!! Повторіть спробу :");
+                    break;
             }
-            else System.out.println("Не вірно введене число!!! Повторіть спробу :");
             System.out.println("1. Перше завдання.");
             System.out.println("2. Друге завдання.");
             System.out.println("3. Третє завдання.");
@@ -39,6 +41,11 @@ public class Main {
         }
     }
 
+
+    /*
+    * 23. Написати програму, яка в залежності від порядкового номера місяця (1,2,...12)
+    * виводить на екран його назву (січень,...грудень).
+    * */
     public static void task1(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введіть номер місяця : ");
@@ -91,6 +98,10 @@ public class Main {
         } while (true);
     }
 
+
+    /*
+    * 23. Протабулювати функцію y=f(x), з параметром x, який змінюється від 'a' до 'b' з кроком h
+    * */
     public static void task2(){
         int a = -1, b = 25;
         double dx = 1.25d;
@@ -100,6 +111,11 @@ public class Main {
         }
     }
 
+
+    /*
+    * 23. Визначити : 1) суму від’ємних елементів масиву;
+    * 2) добуток елементів масиву, розташованих між максимальним і мінімальним елементами.
+    * */
     public static void task3() {
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введіть розмірність масиву : ");
@@ -179,6 +195,11 @@ public class Main {
         }
     }
 
+
+    /*
+    * 23. Дано цілочислову матрицю А розмірності nxm. Вивести одновимірний масив b, в якому кожен елемент
+    * є добутком елементів стовпців, в яких знаходяться максимальний та мінімальний елементи відповідного рядка.
+    * */
     public static void task4(){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Введіть висоту матриці : ");
