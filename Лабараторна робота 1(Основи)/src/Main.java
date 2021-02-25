@@ -4,6 +4,7 @@ import java.util.Scanner;
 //@author pro100user
 
 public class Main {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         System.out.println("1. Перше завдання.");
