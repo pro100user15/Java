@@ -122,7 +122,7 @@ public class Main {
         do {
             if ((3 * x - 12) == 0) throw new IOException("На нуль ділити не можна");
             double y = Math.exp(x) / (3 * x - 12);
-            System.out.print(x + "\t" + y + "\n");
+            System.out.println("x = " + String.format("%.2f", x) + "\ty = "+ String.format("%.2f", y));
             x += dx;
         }while(x <= b);
     }
