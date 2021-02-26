@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -20,7 +21,12 @@ public class Main {
                     task1();
                     break;
                 case 2:
-                    task2();
+                    try {
+                        task2();
+                    }
+                    catch (IOException e){
+                        System.out.println(e.getMessage());
+                    }
                     break;
                 case 3:
                     task3();
@@ -103,13 +109,22 @@ public class Main {
     /*
     * 23. Протабулювати функцію y=f(x), з параметром x, який змінюється від 'a' до 'b' з кроком h
     * */
-    public static void task2(){
+    public static void task2() throws IOException {
         int a = -1, b = 25;
         double dx = 1.25d;
-        for (double x = a; x <= b; x += dx) {
-            double y = Math.exp(x)/(3*x-12);
+//        for (double x = a; x <= b; x += dx) {
+//            if((3*x-12) == 0) throw new IOException("На нуль ділити не можна");
+//            double y = Math.exp(x)/(3*x-12);
+//            System.out.print(x + "\t" + y + "\n");
+//        }
+
+        double x = a;
+        do {
+            if ((3 * x - 12) == 0) throw new IOException("На нуль ділити не можна");
+            double y = Math.exp(x) / (3 * x - 12);
             System.out.print(x + "\t" + y + "\n");
-        }
+            x += dx;
+        }while(x <= b);
     }
 
 
@@ -128,6 +143,7 @@ public class Main {
                 size = scanner.nextInt();
             } else break;
         }
+
         int[] mas = new int[size];
         System.out.println("1.Ввести масив з клавіатури.");
         System.out.println("2.Згенерувати масив.");
@@ -207,7 +223,7 @@ public class Main {
         int n = scanner.nextInt();
         System.out.print("Введіть ширину матриці : ");
         int m = scanner.nextInt();
-        while (true) {
+        for (; ;) {
             if (n < 0) {
                 System.out.println("Не вірно введена розмірність!!! Повторіть спробу :");
                 System.out.print("Введіть висоту матриці : ");
