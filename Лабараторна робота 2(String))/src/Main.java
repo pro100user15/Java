@@ -7,23 +7,46 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Завданння 1 :");
-        task1();
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("1.Завданння 1" +
+                "\n2.Завданння 2" +
+                "\n3.Завдання 3" +
+                "\n4.Вихід" +
+                "\nВведіть число : ");
+        int num = scanner.nextInt();
 
-        try {
-            System.out.println("\n\nЗавданння 2 :");
-              task2("D:\\Project\\Java\\Лабараторна робота 2(String)\\file.txt");
-        }
-        catch (IOException e){
-            System.out.println(e.getMessage());
-        }
-
-        try {
-            System.out.println("\nЗавданння 3 :");
-            task3("D:\\Project\\Java\\Лабараторна робота 2(String)\\input.txt", "D:\\Project\\Java\\Лабараторна робота 2(String)\\output.txt");
-        }
-        catch (IOException e){
-            System.out.println(e.getMessage());
+        while(num != 4){
+            switch (num){
+                case 1:
+                    task1();
+                    break;
+                case 2:
+                    try {
+                        System.out.println("\n\nЗавданння 2 :");
+                        task2("D:\\Project\\Java\\Лабараторна робота 2(String)\\file.txt");
+                    }
+                    catch (IOException ex){
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                case 3:
+                    try {
+                        System.out.println("\nЗавданння 3 :");
+                        task3("D:\\Project\\Java\\Лабараторна робота 2(String)\\input.txt", "D:\\Project\\Java\\Лабараторна робота 2(String)\\output.txt");
+                    }
+                    catch (IOException ex){
+                        System.out.println(ex.getMessage());
+                    }
+                    break;
+                default:
+                    System.out.println("Не вірно введене число!Введіть ще раз :");
+            }
+            System.out.print("1.Завданння 1" +
+                    "\n2.Завданння 2" +
+                    "\n3.Завдання 3" +
+                    "\n4.Вихід" +
+                    "\nВведіть число : ");
+            num = scanner.nextInt();
         }
     }
 
