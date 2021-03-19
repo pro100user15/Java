@@ -30,7 +30,7 @@ public class Main {
                 case 2:
                     try {
                         System.out.println("\n\nЗавданння 2 :");
-                        Tasks.task2("D:\\Project\\Java\\Лабараторна робота 2(String)\\file.txt");
+                        Tasks.task2("D:\\Project\\Java\\Лабараторна робота 2(String))\\file.txt");
                     }
                     catch (IOException ex){
                         System.out.println(ex.getMessage());
