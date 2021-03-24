@@ -41,7 +41,6 @@ public class Tasks {
             }
             words[i++] = p;
         }*/
-
         /*for(int i=0;i < words.length; i++){
             if(words[i].length() > 1){
                 char temp = words[i].charAt(0);
@@ -69,7 +68,6 @@ public class Tasks {
      * */
     private static void task1_b(String[] words){
         String str = "";
-        int i = 0;
         for (String p:words) {
             char[] word = p.toCharArray();
             if(!Character.isLowerCase(word[0]))
