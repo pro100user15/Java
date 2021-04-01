@@ -1,6 +1,7 @@
+package TaskOne;
+
 import java.io.IOException;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Scanner;
 
 /*23. Описати клас для бази зданих з інформацією про клієнтів банку з полями:
@@ -38,32 +39,10 @@ public class Operation {
         this.score = score;
     }
 
-    public void input() throws IOException{
+    public void input() {
         Scanner scanner = new Scanner(System.in);
         Scanner scan = new Scanner(System.in);
-        System.out.println("Введіть дату :");
-        System.out.print("День : ");
-        String day = scanner.nextLine();
-        if(!day.matches("\\d+") || Integer.parseInt(day) > 31)
-            throw new IOException("Не вірно введений день!");
-
-        System.out.print("Місяць : ");
-        String month = scanner.nextLine();
-        if(!month.matches("\\d+") || Integer.parseInt(month) > 12)
-            throw new IOException("Не вірно введений місяць!");
-        System.out.print("Рік : ");
-        String years = scanner.nextLine();
-
-        if(!years.matches("\\d+") || Integer.parseInt(years) > (nowdate.getYear() + 1900))
-            throw new IOException("Уведений не вірний рік!");
-
-        if((Integer.parseInt(years) == (nowdate.getYear() + 1900))
-                && (Integer.parseInt(month) > nowdate.getMonth() + 1)
-                || ((Integer.parseInt(month) == nowdate.getMonth() + 1) && (Integer.parseInt(day) > nowdate.getDate())))
-            throw new IOException("Не вірно введена дата!");
-
-        date = new OperationDate(Integer.parseInt(years), Integer.parseInt(month), Integer.parseInt(day));
-
+        date.enterDate();
         System.out.print("Ім'я : ");
         name = scanner.nextLine();
         System.out.print("Прізвище : ");
@@ -78,6 +57,14 @@ public class Operation {
 
     public void output(){
 
+    }
+
+    public String Task(OperationDate beg_date, OperationDate end_date, double suma) {
+        if(!beg_date.better(date) || beg_date.equally(date))
+            if(end_date.better(date) || end_date.equally(date))
+                if(this.suma > suma)
+                    return this.toString();
+                return null;
     }
 
     @Override

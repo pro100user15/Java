@@ -170,6 +170,7 @@ public class Tasks {
         //перевірка чи файл існує
         File file = new File(filepath);
         if(!file.isFile()) throw new IOException("Файл не знайдено!");
+            //file.createNewFile();
     }
 
     /* Цей метод записує у файл за шляхом {@param filepath}
