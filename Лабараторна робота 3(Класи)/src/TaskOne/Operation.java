@@ -1,15 +1,16 @@
 package TaskOne;
 
-import java.io.IOException;
 import java.util.Date;
 import java.util.Scanner;
 
-/*23. Описати клас для бази зданих з інформацією про клієнтів банку з полями:
+/*
+* 23. Описати клас для бази зданих з інформацією про клієнтів банку з полями:
 дата проведення операції прізвище та ім’я, № рахунку, сума безготівкового
 отримання/переведення, отримано/видано готівкою, залишок вкладу.
 Вивести на екран у формі таблиці дані про клієнтів банку,
 які на протязі заданого періоду часу виконали безготівкове переведення на загальну суму,
-яка перевищує задане користувачем граничне значення.*/
+яка перевищує задане користувачем граничне значення.
+* */
 
 public class Operation {
     OperationDate date;
@@ -59,12 +60,11 @@ public class Operation {
 
     }
 
-    public String Task(OperationDate beg_date, OperationDate end_date, double suma) {
+    public void Task(OperationDate beg_date, OperationDate end_date, double suma) {
         if(!beg_date.better(date) || beg_date.equally(date))
             if(end_date.better(date) || end_date.equally(date))
                 if(this.suma > suma)
-                    return this.toString();
-                return null;
+                    System.out.println(this.toString());
     }
 
     @Override

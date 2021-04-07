@@ -1,24 +1,28 @@
-package TaskOne;
+package Task;
 
 import java.util.Date;
 import java.util.Scanner;
 
-public class OperationDate {
+public class DateSpam {
     int day;
     int month;
     int years;
 
-    public OperationDate() {
+    //конструктор без параметрів
+    public DateSpam() {
         day = 0;
         month = 0;
         years = 0;
     }
-    public OperationDate(int day, int month, int years) {
+
+    //конструктор з параметрами
+    public DateSpam(int day, int month, int years) {
         this.day = day;
         this.month = month;
         this.years = years;
     }
 
+    //метод для вводу дати
     public void enterDate() {
         Scanner scanner = new Scanner(System.in);
         Date nowdate = new Date();
@@ -90,45 +94,30 @@ public class OperationDate {
         }
     }
 
+    //перевизначення методу toString()
     @Override
     public String toString() {
         return day + "." + month + "." + years;
     }
 
-    public boolean better(OperationDate date){
-        if(this.years > date.years ||
-                (this.years == date.years && this.month > date.month) ||
-                (this.years == date.years && this.month == date.month && this.day > date.day))
-            return true;
-        return false;
-    }
-
-    public boolean equally(OperationDate date){
-        if(this.years == date.years && this.month == date.month && this.day == date.day)
-            return true;
-        return false;
-    }
-
+    //гетери
     public int getDay() {
         return day;
     }
-
-    public void setDay(int day) {
-        this.day = day;
-    }
-
     public int getMonth() {
         return month;
     }
-
-    public void setMonth(int month) {
-        this.month = month;
-    }
-
     public int getYears() {
         return years;
     }
 
+    //сетери
+    public void setDay(int day) {
+        this.day = day;
+    }
+    public void setMonth(int month) {
+        this.month = month;
+    }
     public void setYears(int years) {
         this.years = years;
     }
