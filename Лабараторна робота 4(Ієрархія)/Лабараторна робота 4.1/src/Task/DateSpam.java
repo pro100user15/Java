@@ -100,6 +100,13 @@ public class DateSpam {
         return day + "." + month + "." + years;
     }
 
+    public String to_string() {
+        return day + "\n" +
+                month + "\n" +
+                years
+                ;
+    }
+
     //гетери
     public int getDay() {
         return day;

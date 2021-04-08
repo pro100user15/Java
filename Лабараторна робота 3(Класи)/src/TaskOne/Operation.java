@@ -56,10 +56,6 @@ public class Operation {
         score = scanner.nextDouble();
     }
 
-    public void output(){
-
-    }
-
     public void Task(OperationDate beg_date, OperationDate end_date, double suma) {
         if(!beg_date.better(date) || beg_date.equally(date))
             if(end_date.better(date) || end_date.equally(date))
