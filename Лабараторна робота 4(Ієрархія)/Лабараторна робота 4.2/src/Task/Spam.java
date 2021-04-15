@@ -1,11 +1,8 @@
 package Task;
 
-import java.io.IOException;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-public class Spam extends Email_account {
+public final class Spam extends Email_account {
     DateSpam date;          //Дата
     int amount;             //Кількість спам повідомлень
     int all_amount_spam;    //Загальна кількість повідомлень
@@ -38,14 +35,6 @@ public class Spam extends Email_account {
         Scanner scanner = new Scanner(System.in);
         System.out.print("E-mail : ");
         email = scanner.nextLine();
-        Pattern p = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
-                "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
-        Matcher m = p.matcher(email);
-        if(!m.matches()) {
-            System.err.println("Не вірно введений E-mail!");
-            this.input();
-            return;
-        }
         System.out.print("ПІБ : ");
         fullname = scanner.nextLine();
         System.out.println("Дату : ");
@@ -69,11 +58,13 @@ public class Spam extends Email_account {
     //перевизначення методу toString()
     @Override
     public String toString() {
-        return email + '\t' +
+        return "Spam{" +
+                email + '\t' +
                 fullname + '\t' +
                 date + '\t' +
                 amount + '\t' +
-                all_amount_spam;
+                all_amount_spam +
+                '}';
     }
 
     public String to_string() {

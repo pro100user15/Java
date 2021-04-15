@@ -46,14 +46,13 @@ public class Task {
         count_note();
 
         int i = 0;
-        System.out.println("\n--------Інформація про фільми :--------");
+        System.out.println("\nІнформація про фільми :");
         for (var p :
                 spam) {
             System.out.println("\nФільм №" + (i + 1) + " :");
             p.output();
             i++;
         }
-        System.out.println("\n---------------------------------------");
     }
 
     public void search() throws IOException {
@@ -93,49 +92,9 @@ public class Task {
 
     public void sort() throws IOException {
         count_note();
-        ArrayList<Spam> sortmovies = new ArrayList<Spam>(spam);
-        Scanner scanner = new Scanner(System.in);
-        for(;;) {
-            System.out.print("\nВведіть параметр по якому відбудеться сортування : ");
-            String commnd = scanner.nextLine();
-            switch (commnd) {
-                case "email":
-                    sortmovies.sort(Comparator.comparing(Spam::getEmail));
-                    break;
-                case "fullname":
-                    sortmovies.sort(Comparator.comparing(Spam::getFullname));
-                    break;
-                case "date":
-                    Spam[] arr = sort_date();
 
-                    int i = 0;
-                    System.out.println("\nВідсортований список :");
-                    for (var p :
-                            arr) {
-                        System.out.println("\nФільм №" + (i + 1) + " :");
-                        p.output();
-                        i++;
-                    }
-                    return;
-                case "amount":
-                    sortmovies.sort(Comparator.comparing(Spam::getAmount));
-                    break;
-                case "all amount":
-                    sortmovies.sort(Comparator.comparing(Spam::getAll_amount_spam));
-                    break;
-                case "help":
-                    System.out.println("\nemail - по E-mail " + "\n" +
-                            "fullname - по ПІБ " + "\n" +
-                            "date - по даті " + "\n" +
-                            "amount - по кількості спам повідомлень " + "\n" +
-                            "all amount - по загальній кількостей повідомлень");
-                    continue;
-                default:
-                    System.out.println("Не вірно введений параметр сортування(help-допомога). Введіть ще раз :");
-                        continue;
-            }
-            break;
-        }
+        ArrayList<Spam> sortmovies = new ArrayList<Spam>(spam);
+        sortmovies.sort(Comparator.comparing(Spam::getAmount));
 
         int i = 0;
         System.out.println("\nВідсортований список :");
@@ -247,21 +206,6 @@ public class Task {
     }
 
     private void task_3() {
-        Spam[] arr = sort_date();
-
-        System.out.println();
-        for (Spam p : arr) {
-            System.out.println(p.toString());
-        }
-
-        System.out.println("\nДні, коли кількість спаму збільшувалась :");
-        for (int i = 1; i < arr.length; i++)
-            if (arr[i].amount > arr[i - 1].amount) {
-                System.out.println(arr[i].getDate().toString());
-            }
-    }
-
-    private Spam[] sort_date() {
         Spam[] arr = new Spam[spam.size()];
         arr = spam.toArray(arr);
         for (int i = 0; i < arr.length; i++)
@@ -271,7 +215,15 @@ public class Task {
                     arr[j] = arr[j + 1];
                     arr[j + 1] = temp;
                 }
-        return arr;
+
+        for (Spam p : arr) {
+            System.out.println(p.toString());
+        }
+
+        for (int i = 1; i < arr.length; i++)
+            if (arr[i].amount > arr[i - 1].amount) {
+                System.out.println(arr[i].getDate().toString());
+            }
     }
 
     private void count_note() throws IOException {
