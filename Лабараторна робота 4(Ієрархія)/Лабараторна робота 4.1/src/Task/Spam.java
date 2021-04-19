@@ -1,6 +1,5 @@
 package Task;
 
-import java.io.IOException;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -27,9 +26,7 @@ public class Spam extends Email_account {
     //конструктор з параметрами
     public Spam(String email, String fullname, int d, int m, int y, int amount, int all_amount_spam) {
         super(email, fullname);
-        this.date = new DateSpam(d,m,y);
-        this.amount = amount;
-        this.all_amount_spam = all_amount_spam;
+        this(d, m, y, amount, all_amount_spam);
     }
 
     //метод для вводу даних

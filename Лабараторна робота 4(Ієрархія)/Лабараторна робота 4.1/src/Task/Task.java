@@ -2,6 +2,8 @@ package Task;
 
 import java.io.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Task {
     ArrayList<Spam> spam;
@@ -49,7 +51,7 @@ public class Task {
         System.out.println("\n--------Інформація про фільми :--------");
         for (var p :
                 spam) {
-            System.out.println("\nФільм №" + (i + 1) + " :");
+            System.out.println("\nСпам №" + (i + 1) + " :");
             p.output();
             i++;
         }
@@ -61,26 +63,28 @@ public class Task {
 
         Scanner scanner = new Scanner(System.in);
         Date nowdate = new Date();
-        System.out.println("\nВведіть рік випуску, який ви шукаєте : ");
-        String line = scanner.nextLine();
-        if (!line.matches("\\d+") || Integer.parseInt(line) > (nowdate.getYear() + 1900)) {
-            System.err.println("Не вірно введений день!");
+        System.out.println("\nВведіть email, який ви шукаєте : ");
+        String email = scanner.nextLine();
+        Pattern p = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
+                "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        Matcher m = p.matcher(email);
+        if(!m.matches()) {
+            System.err.println("Не вірно введений E-mail!");
             this.search();
             return;
         }
-        int amount = Integer.parseInt(line);
 
         boolean flag = false;
         int i = 0;
-        for (var p :
+        for (var op :
                 spam) {
-            if (p.getAmount() == amount) {
+            if (op.getEmail() == email) {
                 if (flag == false) {
                     System.out.println("\nРезультат : ");
                     flag = true;
                 }
-                System.out.println("Фільм №" + (i + 1) + " :");
-                p.output();
+                System.out.println("Спам №" + (i + 1) + " :");
+                op.output();
                 System.out.println();
                 i++;
             }
@@ -109,13 +113,14 @@ public class Task {
                     Spam[] arr = sort_date();
 
                     int i = 0;
-                    System.out.println("\nВідсортований список :");
+                    System.out.println("\n--------Відсортований список :--------");
                     for (var p :
                             arr) {
                         System.out.println("\nФільм №" + (i + 1) + " :");
                         p.output();
                         i++;
                     }
+                    System.out.println("\n--------------------------------------");
                     return;
                 case "amount":
                     sortmovies.sort(Comparator.comparing(Spam::getAmount));
@@ -138,20 +143,21 @@ public class Task {
         }
 
         int i = 0;
-        System.out.println("\nВідсортований список :");
+        System.out.println("\n--------Відсортований список :--------");
         for (var p :
                 sortmovies) {
-            System.out.println("\nФільм №" + (i + 1) + " :");
+            System.out.println("\nСпам №" + (i + 1) + " :");
             p.output();
             i++;
         }
+        System.out.println("\n--------------------------------------");
     }
 
     public void delete() throws IOException {
         count_note();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("\nВведіть порядковий номер фільму, який ви хочете видалити : ");
+        System.out.print("\nВведіть порядковий номер, який ви хочете видалити : ");
         String line = scanner.nextLine();
         if (!line.matches("\\d+") || Integer.parseInt(line) <= 0 || Integer.parseInt(line) > spam.size()) {
             System.err.println("Не вірно введений номер!");
