@@ -26,7 +26,9 @@ public class Spam extends Email_account {
     //конструктор з параметрами
     public Spam(String email, String fullname, int d, int m, int y, int amount, int all_amount_spam) {
         super(email, fullname);
-        this(d, m, y, amount, all_amount_spam);
+        this.date = new DateSpam(d,m,y);
+        this.amount = amount;
+        this.all_amount_spam = all_amount_spam;
     }
 
     //метод для вводу даних
