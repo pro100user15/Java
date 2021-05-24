@@ -1,50 +1,57 @@
 package Tasks.TaskOne;
 
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Scanner;
 
-enum Subject{
-    Math, Language, History, dotNET, Java;
-    byte rating;
+class Subject implements Serializable {
+    enum Subjects {
+        Math, Language, History, dotNET, Java;
+    }
+    Subjects []subjects;
+    byte []rating;
 
     Subject() {
-        rating = 0;
+        subjects = new Subjects[]{Subjects.Math, Subjects.Language, Subjects.History, Subjects.dotNET, Subjects.Java};
+        rating = new byte[5];
     }
-    Subject(byte rating) {
-        this.rating = rating;
+    public Subject(byte Math, byte Language, byte History, byte dotNET, byte Java) {
+        subjects = new Subjects[]{Subjects.Math, Subjects.Language, Subjects.History, Subjects.dotNET, Subjects.Java};
+        rating = new byte[]{Math, Language, History, dotNET, Java};
     }
 
     void input() {
-        System.out.print("Введіть оцінку з " + this.name() + " : ");
-        inputRating();
+        for(int i=0;i<subjects.length;i++) {
+            System.out.print("Введіть оцінку з " + subjects[i].name() + " : ");
+            rating[i] = inputRating();
+        }
     }
     void output() {
-        System.out.print("Оцінка з " + this.name() + " - " + rating);
+        for(int i=0;i<subjects.length;i++)
+            System.out.println("Оцінка з " + subjects[i].name() + " - " + rating[i]);
     }
 
-    private void inputRating() {
+    private byte inputRating() {
         Scanner scanner = new Scanner(System.in);
         String line = scanner.nextLine();
         if (!line.matches("\\d+") || Integer.parseInt(line) < 0 || Integer.parseInt(line) > 100) {
             System.err.println("Не вірно введена оцінка!");
             this.inputRating();
-            return;
         }
-        rating = Byte.parseByte(line);
+        return Byte.parseByte(line);
     }
 
     //гетер
-    public byte getRating() {return rating;}
+    public byte getRating(int index) {return rating[index];}
 
     //сетер
-    public void setRating(byte rating) {this.rating = rating;}
+    public void setRating(int index, byte rating) {this.rating[index] = rating;}
 
     @Override
     public String toString() {
-        return "Subject " + this.name() +
-                "\trating=" + rating +
-                '}';
+        String result = "";
+        for(int i=0;i<subjects.length;i++)
+            result += subjects[i].name() + " - " + rating[i] + "\t\t";
+        return result;
     }
 }
 
@@ -52,20 +59,20 @@ public class Student implements Serializable {
     String lastname;        //прізвище
     String name;            //ім'я
     int nomer;              //№ залікової книжки
-    Subject []subjects;     //предмети
+    Subject subjects;     //предмети
 
     public Student() {
         lastname = "";
         name = "";
         nomer = 0;
-        subjects = new Subject[]{Subject.Math, Subject.Language, Subject.History, Subject.dotNET, Subject.Java};
+        subjects = new Subject();
     }
 
-    public Student(String lastname, String name, int nomer, Subject[] subjects) {
+    public Student(String lastname, String name, int nomer, byte Math, byte Language, byte History, byte dotNET, byte Java) {
         this.lastname = lastname;
         this.name = name;
         this.nomer = nomer;
-        this.subjects = subjects;
+        this.subjects = new Subject(Math, Language, History, dotNET, Java);
     }
 
 
@@ -77,40 +84,49 @@ public class Student implements Serializable {
         name = scanner.nextLine();
         System.out.print("№ залікової книжки : ");
         nomer = scanner.nextInt();
-        for(Subject subject : subjects){
-            subject.input();
-        }
+        subjects.input();
     }
 
     void output() {
-        System.out.print("Прізвище - " + lastname);
-        System.out.print("Ім'я - " + name);
-        System.out.print("№ залікової книжки - " + nomer);
-        for(Subject subject : subjects){
-            subject.output();
-        }
+        System.out.println("Прізвище - " + lastname);
+        System.out.println("Ім'я - " + name);
+        System.out.println("№ залікової книжки - " + nomer);
+        subjects.output();
     }
 
 
     @Override
     public String toString() {
-        return "Student{" +
-                "lastname='" + lastname + '\'' +
-                ", name='" + name + '\'' +
-                ", nomer=" + nomer +
-                ", subjects=" + Arrays.toString(subjects) +
-                '}';
+        return lastname + '\t' + '\t' +
+                name + '\t' + '\t' +
+                nomer + '\t' + '\t' +
+                subjects.toString();
     }
+
 
     //гетери
     public String getLastname() {return lastname;}
     public String getName() {return name;}
     public int getNomer() {return nomer;}
-    public Subject[] getSubjects() {return subjects;}
+    public Subject getSubject() {return subjects;}
+    public double getAverage() {
+        int average = 0;
+        for(byte rating : subjects.rating) {
+            average += rating;
+        }
+        return (double) average/subjects.rating.length;
+    }
 
     //сетери
     public void setLastname(String lastname) {this.lastname = lastname;}
     public void setName(String name) {this.name = name;}
     public void setNomer(int nomer) {this.nomer = nomer;}
-    public void setSubjects(Subject[] subjects) {this.subjects = subjects;}
+    public void setSubjects(Subject subjects) {this.subjects = subjects;}
+
+    public boolean isUnsatisfactory() {
+        for(int i=0;i<subjects.rating.length;i++)
+            if(subjects.rating[i] <= 2)
+                return true;
+        return false;
+    }
 }

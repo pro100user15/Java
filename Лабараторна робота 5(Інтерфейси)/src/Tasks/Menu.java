@@ -1,5 +1,8 @@
 package Tasks;
 
+import Tasks.TaskOne.TaskOne;
+import Tasks.TaskTwo.TaskTwo;
+
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -30,55 +33,82 @@ public class Menu {
     }
 
     public static void TaskOne() {
-        try {
-            Scanner scanner = new Scanner(System.in);
-            Task task = new Task();
-            for(;;){
+        Scanner scanner = new Scanner(System.in);
+        TaskOne task = new TaskOne();
+        for (; ; ) {
+            try {
                 System.out.print("\nВведіть команду : ");
                 String command = scanner.nextLine();
 
-                switch (command){
-                    case "add":
-                        task.add();
-                        break;
-                    case "edit":
-                        task.edit();
-                        break;
-                    case "print":
-                        task.print();
-                        break;
-                    case "search":
-                        task.search();
-                        break;
-                    case "sort":
-                        task.sort();
-                        break;
-                    case "delete":
-                        task.delete();
-                        break;
-                    case "exit":
+                switch (command) {
+                    case "add" -> task.add();
+                    case "edit" -> task.edit();
+                    case "print" -> task.print();
+                    case "printlist" -> task.printlist();
+                    case "search" -> task.search();
+                    case "sort" -> task.sort();
+                    case "delete" -> task.delete();
+                    case "task" -> task.task();
+                    case "exit" -> {
                         return;
-                    case "help":
-                        System.out.println("\nadd - додати фільм" + "\n" +
-                                "edit - редагувати фільм" + "\n" +
-                                "print - висести список фільмів" + "\n" +
-                                "search - пошук фільма" + "\n" +
-                                "sort - сортування фільмів" + "\n" +
-                                "delete - видалити фільм" + "\n" +
+                    }
+                    case "help" -> {
+                        System.out.println("\nadd - додати інформацію про студента" + "\n" +
+                                "edit - редагувати інформацію про студента" + "\n" +
+                                "print - висести інформацію про студента" + "\n" +
+                                "printlist - висести інформацію про студента у вигляді таблиці" + "\n" +
+                                "search - пошук інформації про студента" + "\n" +
+                                "sort - сортування інформації про студента" + "\n" +
+                                "delete - видалити інформацію про студента" + "\n" +
+                                "task - відсоток студентів, що мають незадовільні оцінки" + "\n" +
                                 "exit - вихід");
-                        break;
-                    default:
-                        System.err.print("Не вірно введена команда(help - допомога)! Введіть ще раз :");
-                        break;
+                    }
+                    default -> System.err.print("Не вірно введена команда(help - допомога)! Введіть ще раз :");
                 }
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
             }
-        }
-        catch (IOException ex){
-            System.err.println(ex.getMessage());
         }
     }
 
     public static void TaskTwo() {
+        Scanner scanner = new Scanner(System.in);
+        TaskTwo task = new TaskTwo();
+        for (; ; ) {
+            try {
+                System.out.print("\nВведіть команду : ");
+                String command = scanner.nextLine();
 
+                switch (command) {
+                    case "add" -> task.add();
+                    case "edit" -> task.edit();
+                    case "print" -> task.print();
+                    case "printlist" -> task.printlist();
+                    case "search" -> task.search();
+                    case "sort" -> task.sort();
+                    case "delete" -> task.delete();
+                    case "task" -> task.task();
+                    case "exit" -> {
+                        return;
+                    }
+                    case "help" -> {
+                        System.out.println("\nadd - додати інформацію про виступ" + "\n" +
+                                "edit - редагувати інформацію про виступ" + "\n" +
+                                "print - висести інформацію про виступи" + "\n" +
+                                "printlist - висести інформацію про виступи у вигляді таблиці" + "\n" +
+                                "search - пошук інформації про виступ" + "\n" +
+                                "sort - сортування інформації про виступ" + "\n" +
+                                "delete - видалити інформацію про виступ" + "\n" +
+                                "task - вивід 1)сумарної кількості слухачів,\t" +
+                                "2)день з найбільшою кількістю слухачів,\t" +
+                                "3)довжина прізвища" + "\n" +
+                                "exit - вихід");
+                    }
+                    default -> System.err.print("Не вірно введена команда(help - допомога)! Введіть ще раз :");
+                }
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+        }
     }
 }
